@@ -1,3 +1,36 @@
+<?php
+if(!empty($_POST)){
+	$stock = ["julien" => "123456","kevin" => "azerty"];
+	$username = $_POST["username"];
+	$password = $_POST["password"];
+
+	if (!empty($username) && !empty($password)){
+		/* TODO : verifier couple user / mdp */
+		if(isset($stock[$username])){
+			if ($password === $stock[$username]){
+					die("connecté");
+			}else{
+				header("HTTP/1.0 403 Forbidden");
+				/* TODO : USERNAME ou MDP pas bon */
+			}
+		}else{
+			header("HTTP/1.0 403 Forbidden");
+			/* TODO : USERNAME ou MDP pas bon */
+		}
+	}else{
+		die("manque un champ");
+		/* TODO : signaler qu'il manque un champ */
+	}
+
+}
+
+	
+
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
