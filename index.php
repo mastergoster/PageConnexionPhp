@@ -1,4 +1,15 @@
 <?php
+session_start();
+if (isset($_SESSION["connect"])) {
+	$connect = $_SESSION["connect"];
+}else{
+	$connect = false;
+}
+if($connect){
+	header("Location: http://localhost.demo/testconnection/page.php");
+}
+
+
 if(!empty($_POST)){
 	$stock = ["julien" => "123456","kevin" => "azerty"];
 	$username = $_POST["username"];
@@ -8,7 +19,10 @@ if(!empty($_POST)){
 		/* TODO : verifier couple user / mdp */
 		if(isset($stock[$username])){
 			if ($password === $stock[$username]){
-					die("connecté");
+					
+					$_SESSION["connect"] = true;
+					$_SESSION["username"] = $username;
+					header("Location: http://localhost.demo/testconnection/page.php");
 			}else{
 				header("HTTP/1.0 403 Forbidden");
 				/* TODO : USERNAME ou MDP pas bon */
