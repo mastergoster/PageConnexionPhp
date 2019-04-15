@@ -1,16 +1,10 @@
 <?php
-session_start();
-if(isset($_GET["deconnect"]) && $_GET["deconnect"]){
-	unset($_SESSION["connect"]);
-} 
-$connect = $_SESSION["connect"];
-if (empty($connect)){
-	header("Location: http://localhost.demo/testconnection/");	
-}
-$username = $_SESSION['username'];
-
+require 'connect.php';
 
 echo "bonjour {$username}<br />";
-echo "super site";
+echo "super site  <br />";
 ?>
-<a href="http://localhost.demo/testconnection/page.php?deconnect=true">déconnexion</a>
+
+<a href="page.php">Site</a><br/>
+<a href="profil.php">Mon Profil</a><br/>
+<a href="?deconnect=true">déconnexion</a>

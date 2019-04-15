@@ -8,10 +8,12 @@ if (isset($_SESSION["connect"])) {
 if($connect){
 	header("Location: http://localhost.demo/testconnection/page.php");
 }
-
+$errusername="";
+$errpassword="";
 
 if(!empty($_POST)){
-	$stock = ["julien" => "123456","kevin" => "azerty"];
+	$stock = require 'stack.php';
+	var_dump($stock);die();
 	$username = $_POST["username"];
 	$password = $_POST["password"];
 
@@ -32,17 +34,19 @@ if(!empty($_POST)){
 			/* TODO : USERNAME ou MDP pas bon */
 		}
 	}else{
-		die("manque un champ");
-		/* TODO : signaler qu'il manque un champ */
+
+		if(empty($username)){
+			$errusername= "class=\"danger\"";
+		}
+
+		if(empty($password)){
+			$errpassword="class=\"danger\"";
+		}
+
+		
 	}
 
 }
-
-	
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -61,8 +65,8 @@ if(!empty($_POST)){
 					<h2>Identification</h2>
 				</header>
 				<form action="" method="Post">
-					<input type="text" name="username" placeholder="Nom d'utilisateur" required="required" />
-					<input type="password" name="password" placeholder="Mot de passe" required="required" />
+					<input <?= $errusername ?> type="text" name="username" placeholder="Nom d'utilisateur" required="required" />
+					<input <?= $errpassword ?> type="password" name="password" placeholder="Mot de passe" required="required" />
 					<button type="submit">Connexion</button>
 				</form>
 			</div>
