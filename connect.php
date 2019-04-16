@@ -10,7 +10,7 @@ if (isset($_SESSION["connect"])) {
 	$connect = false;
 }
 if (empty($connect)){
-	header("Location: http://localhost.demo/testconnection/");	
+	header("Location: /testconnection/");	
 }
 
 if (isset($_SESSION["username"])) {

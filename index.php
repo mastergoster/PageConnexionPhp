@@ -6,7 +6,7 @@ if (isset($_SESSION["connect"])) {
 	$connect = false;
 }
 if($connect){
-	header("Location: http://localhost.demo/testconnection/page.php");
+	header("Location: page.php");
 	//fin du traitement
 }
 
@@ -21,20 +21,28 @@ if(!empty($_POST)){
 	$password = $_POST["password"];
 
 	if (!empty($username) && !empty($password)){
-		/* TODO : verifier couple user / mdp */
-		if(isset($stock[$username])){
-			if ($password === $stock[$username]){
+		//recuperation users
+		require_once 'db.php';
+		$sql = "SELECT * FROM users WHERE `name`= ?";
+		$statement = $pdo->prepare($sql);
+		$statement->execute([$username]);
+		$user = $statement->fetch();
+
+		
+		/* verifier couple user / mdp */
+		if($user){
+			if ($password === $user["password"]){
 					
 					$_SESSION["connect"] = true;
 					$_SESSION["username"] = $username;
 					header("Location: http://localhost.demo/testconnection/page.php");
 			}else{
 				header("HTTP/1.0 403 Forbidden");
-				/* TODO : USERNAME ou MDP pas bon */
+				/*  USERNAME ou MDP pas bon */
 			}
 		}else{
 			header("HTTP/1.0 403 Forbidden");
-			/* TODO : USERNAME ou MDP pas bon */
+			/* USERNAME ou MDP pas bon */
 		}
 	}else{
 
