@@ -1,10 +1,31 @@
 <?php
+require 'connect.php';
 require 'db.php';
+/**
+* A ne pas utiliser sauf pour select
+* http://localhost.demo/testconnection/deletebeer.php?id=1
+* $_GET['id']
+*/
 
-$sql = "DELETE FROM `biere` WHERE `id`=1";
-$nb = $pdo->exec($sql);
-echo $nb;
-//vider table /!\
-//DELETE FROM `biere`
-//supprime ligne 1
-//DELETE FROM `biere` WHERE `id`=1
+
+//form action "http://localhost.demo/testconnection/deletebeer.php"
+//$_POST["id"]
+
+	//echo $nb;
+	//vider table /!\
+	//DELETE FROM `biere`
+	//supprime ligne 1
+	//DELETE FROM `biere` WHERE `id`=1
+
+
+if(isset($_POST["id"])){
+	$id = $_POST["id"];
+	//$sql = "DELETE FROM `biere` WHERE `id`=3";
+	$sql = "DELETE FROM `biere` WHERE `id`= ?";
+	$statement = $pdo->prepare($sql);
+	$statement->execute([$id]);
+}
+
+
+header("Location: beer.php");
+// header(location : beer.php);
