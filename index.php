@@ -7,13 +7,16 @@ if (isset($_SESSION["connect"])) {
 }
 if($connect){
 	header("Location: http://localhost.demo/testconnection/page.php");
+	//fin du traitement
 }
+
+
+
 $errusername="";
 $errpassword="";
 
 if(!empty($_POST)){
 	$stock = require 'stack.php';
-	var_dump($stock);die();
 	$username = $_POST["username"];
 	$password = $_POST["password"];
 

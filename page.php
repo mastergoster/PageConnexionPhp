@@ -7,4 +7,5 @@ echo "super site  <br />";
 
 <a href="page.php">Site</a><br/>
 <a href="profil.php">Mon Profil</a><br/>
+<a href="beer.php">Les Bières</a><br/>
 <a href="?deconnect=true">déconnexion</a>
