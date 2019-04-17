@@ -17,7 +17,7 @@ $errpassword="";
 
 if(!empty($_POST)){
 	$stock = require 'stack.php';
-	$username = $_POST["username"];
+	$username = strtolower($_POST["username"]);
 	$password = $_POST["password"];
 
 	if (!empty($username) && !empty($password)){
@@ -31,11 +31,11 @@ if(!empty($_POST)){
 		
 		/* verifier couple user / mdp */
 		if($user){
-			if ($password === $user["password"]){
+			if (password_verify($password, $user["password"])){
 					
 					$_SESSION["connect"] = true;
 					$_SESSION["username"] = $username;
-					header("Location: http://localhost.demo/testconnection/page.php");
+					header("Location: page.php");
 			}else{
 				header("HTTP/1.0 403 Forbidden");
 				/*  USERNAME ou MDP pas bon */
